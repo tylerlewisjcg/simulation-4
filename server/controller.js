@@ -11,7 +11,6 @@ module.exports = {
       login: function(req, res, next) {
         const users = req.app.get('db')
         const { username, password } = req.body;
-
         if (user => user.username === req.body.username && user.password === req.body.password) {
           req.session.user.username = req.body.username;
           req.session.user.loggedIn = true;

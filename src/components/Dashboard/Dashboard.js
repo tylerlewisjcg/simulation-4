@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
+import { getUserInfo } from './../../ducks/reducer';
+import {connect} from 'react-redux';
+
 class Dashboard extends Component {
-    state = {}
+    state = {
+        user: ''
+    }
+    componentDidMount() {
+        this.props.getUserInfo();
+         }
+
+
     render() { 
         return ( <div>
             Dashboard Component
@@ -8,4 +18,10 @@ class Dashboard extends Component {
     }
 }
  
-export default Dashboard;
+function mapStateToProps(state) {
+    return {
+      user: state.user
+    };
+  }
+  
+  export default connect(mapStateToProps, { getUserInfo })(Dashboard);

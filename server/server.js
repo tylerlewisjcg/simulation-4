@@ -24,7 +24,7 @@ const express = require('express'),
         saveUninitialized: true,
         secret: SESSION_SECRET
     }))
-
+app.use(checkForSession);
 
 app.post("/api/newuser", controller.post);
 app.post('/api/login', controller.login)
@@ -33,6 +33,12 @@ app.post('/api/login', controller.login)
     req.logOut();
     res.redirect("http://localhost:3333/");
   });
-
+  app.get("/auth/me", function(req, res) {
+    if (req.user) {
+      res.status(200).send(req.user);
+    } else {
+      res.status(401).send("You Don't appear to be someone i recognize");
+    }
+  });
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port ${SERVER_PORT}`))

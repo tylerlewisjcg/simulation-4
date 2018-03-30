@@ -6,6 +6,7 @@ const initialState = {
 const UPDATE_USER_INFO = "UPDATE_USER_INFO";
 
 export function getUserInfo() {
+  console.log("ugh");
   const userData = axios.get("/auth/me").then(res => {
     return res.data;
   });
