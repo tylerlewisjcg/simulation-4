@@ -5,8 +5,7 @@ import App from "./App";
 import { unregister } from "./registerServiceWorker";
 import store from "./ducks/store";
 import { Provider } from "react-redux";
-import {HashRouter } from 'react-router-dom';
-
+import {HashRouter} from 'react-router-dom';
 ReactDOM.render(
   <Provider store={store}>
   <HashRouter>
