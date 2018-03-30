@@ -4,7 +4,7 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     massive = require('massive'),
     controller = require('./controller');
-
+    const checkForSession = require('./middleware/checkForSession');
 
     const port = process.env.PORT || 3333;
     const {
@@ -27,18 +27,12 @@ const express = require('express'),
 
 
 app.post("/api/newuser", controller.post);
-app.get("/api/me", function(req, res) {
-    if (req.user) {
-      res.status(200).send(req.user);
-    } else {
-      res.status(401).send("You Don't appear to be someone i recognize");
-    }
-  });
+app.post('/api/login', controller.login)
 
   app.get("/api/logout", (req, res) => {
     req.logOut();
     res.redirect("http://localhost:3333/");
   });
-  app.post('/api/login', controller.login)
+
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port ${SERVER_PORT}`))

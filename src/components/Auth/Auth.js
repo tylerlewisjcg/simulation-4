@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 class Auth extends Component {
-    state = {
+   state = {
         username: '',
         password: ''
     }
@@ -37,8 +39,6 @@ class Auth extends Component {
             } else {
                
                 this.props.setCurrentUser(res.data);
-                console.log('res', res)
-                this.props.history.push('/dashboard');   ///what is this.props.history????
             }
         })
     }
@@ -48,8 +48,8 @@ class Auth extends Component {
             <input onChange={e=> this.handleUsernameChange(e.target.value)}/>
             <input onChange={e=> this.handlePasswordChange(e.target.value)}/>
             <button onClick={()=> this.loginUser()}>Login</button>
-            <button onClick={()=> this.registerUser()}>Register</button>
-            
+        <Link to="/dashboard">  <button onClick={()=> this.registerUser()}>
+          Register</button></Link>
         </div> )
     }
 }
